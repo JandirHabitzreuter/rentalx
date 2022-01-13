@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { SpecificationRepository } from "../modules/cars/repositories/specificationRepository";
-import { CreateSpecificationService } from "../modules/cars/services/CreateSpecificationService";
+import { SpecificationRepository } from "../modules/cars/repositories/implementation/specificationRepository";
+import { CreateSpecificationService } from "../modules/cars/useCases/CreateSpecification/CreateSpecificationUseCase";
 
 const specificationRoutes = Router();
 // Se precisar mudar para outro banco é só alterar o repository
