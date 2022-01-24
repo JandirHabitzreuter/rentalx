@@ -34,6 +34,11 @@ export async function ensureAuthenticated(
             throw new AppError("User does not exists!", 401);
         }
 
+        // Precisa sobreescrever o request do Express para colocar a propriedade user (typescript)
+        request.user = {
+            id: user_id,
+        };
+
         next();
     } catch (error) {
         throw new AppError("Invalid token!", 401);
