@@ -5,6 +5,9 @@ import { CreateCategoryController } from "@modules/cars/useCases/CreateCategory/
 import { ImportCategoryController } from "@modules/cars/useCases/importCategories/ImportCategoryController";
 import { ListCategoriesController } from "@modules/cars/useCases/ListCategories/ListCategoriesController";
 
+import { ensureAdmin } from "../middlewares/ensureAdmin";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+
 const categoriesRoutes = Router();
 
 const createCategoryController = new CreateCategoryController();
@@ -16,7 +19,12 @@ const upload = multer({
 });
 
 // Funciona como middware
-categoriesRoutes.post("/", createCategoryController.handle);
+categoriesRoutes.post(
+    "/",
+    ensureAuthenticated,
+    ensureAdmin,
+    createCategoryController.handle
+);
 
 categoriesRoutes.get("/", listCategoriesController.handle);
 
